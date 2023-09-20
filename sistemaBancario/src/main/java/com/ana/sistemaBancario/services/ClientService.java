@@ -36,4 +36,13 @@ public class ClientService {
         Client client = clientRepository.findById(idClient).orElseThrow(()->new EntityNotFoundException("Cliente não encontrado"));
         clientRepository.delete(client);
     }
+    public ClientResponse updateClient(ClientRequest clientRequest,Long idClient){
+        Client client = clientRepository.findById(idClient).orElseThrow(()->new EntityNotFoundException("Cliente não encontrado"));
+        client.setAddress(clientRequest.getAddress());
+        client.setEmail(clientRequest.getEmail());
+        return modelMapper.map(client,ClientResponse.class);
+    }
+    public Client findClient(Long idClient){
+        return clientRepository.findById(idClient).orElseThrow(()->new EntityNotFoundException("Cliente não encontrado"));
+    }
 }
