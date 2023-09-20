@@ -34,13 +34,20 @@ public class AccountService {
         return modelMapper.map(account,AccountResponse.class);
     }
 
-    public List<AccountResponse> findAllAccounts(){
-        return accountRepository.findAll().stream()
+    public List<AccountResponse> findAllByClientId(Long idClient){
+        clientService.findClient(idClient);
+        return accountRepository.findAllByClientId(idClient).stream()
                 .map(account -> modelMapper.map(account,AccountResponse.class)).toList();
     }
     public void deleteAccount(Long idAccount){
         Account account = accountRepository.findById(idAccount).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada"));
         accountRepository.delete(account);
+    }
+    public Account findAccount(Long idAccount){
+        return accountRepository.findById(idAccount).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada"));
+    }
+    public Account findByAccountNumber(Long accountNumber){
+        return accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada"));
     }
 
 }
