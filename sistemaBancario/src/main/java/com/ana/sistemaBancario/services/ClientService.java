@@ -40,6 +40,7 @@ public class ClientService {
         Client client = clientRepository.findById(idClient).orElseThrow(()->new EntityNotFoundException("Cliente não encontrado"));
         client.setAddress(clientRequest.getAddress());
         client.setEmail(clientRequest.getEmail());
+        clientRepository.save(client);
         return modelMapper.map(client,ClientResponse.class);
     }
     public Client findClient(Long idClient){
