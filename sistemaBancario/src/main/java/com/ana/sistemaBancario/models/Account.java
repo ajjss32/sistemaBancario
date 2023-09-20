@@ -24,6 +24,7 @@ public class Account {
     @Column(nullable = false)
     private BigDecimal balence = new BigDecimal("0.0");
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_id_client")
     private Client client;
 
 }
