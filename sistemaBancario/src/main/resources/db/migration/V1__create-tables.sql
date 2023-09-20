@@ -1,14 +1,14 @@
 CREATE TABLE client(
     id SERIAL PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
-	cpf VARCHAR(11) NOT NULL,
-	email VARCHAR(255) NOT NULL,
+	cpf VARCHAR(11) UNIQUE NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
 	address TEXT NOT NULL
 );
 
 CREATE TABLE account(
     id SERIAL PRIMARY KEY,
-    account_number BIGINT NOT NULL,
+    account_number BIGINT UNIQUE NOT NULL,
     balence NUMERIC NOT NULL,
     fk_id_client BIGINT NOT NULL,
     CONSTRAINT account_fk_id_client FOREIGN KEY (fk_id_client)
