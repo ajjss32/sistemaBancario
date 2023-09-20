@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/account/{idclient}")
 public class AccountController {
     @Autowired
     private AccountService accountService;
-    @PostMapping("{idclient}")
+    @PostMapping
     public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid AccountRequest accountRequest,@PathVariable(value = "idclient") Long idCliente){
         AccountResponse account = accountService.createAccount(accountRequest, idCliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(account);
     }
     @GetMapping
-    public ResponseEntity<List<AccountResponse>> getAllAccounts(){
-        List<AccountResponse> allAccounts = accountService.findAllAccounts();
+    public ResponseEntity<List<AccountResponse>> getAllAccounts(@PathVariable(value = "idclient") Long idCliente){
+        List<AccountResponse> allAccounts = accountService.findAllByClientId(idCliente);
         return ResponseEntity.ok(allAccounts);
     }
     @GetMapping("{idaccount}")
