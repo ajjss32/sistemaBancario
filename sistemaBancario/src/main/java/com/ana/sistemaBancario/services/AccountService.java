@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -49,5 +50,6 @@ public class AccountService {
     public Account findByAccountNumber(Long accountNumber){
         return accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada"));
     }
+
 
 }

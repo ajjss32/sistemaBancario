@@ -17,9 +17,15 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
     @PostMapping
-    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody @Valid TransactionRequest transactionRequest
+    public ResponseEntity<TransactionResponse> makeDepositToOtherAccount(@RequestBody @Valid TransactionRequest transactionRequest
             ,@PathVariable(value = "idaccount") Long idAccount){
-        TransactionResponse transaction = transactionService.createTransaction(transactionRequest, idAccount);
+        TransactionResponse transaction = transactionService.makeDepositToOtherAccount(transactionRequest, idAccount);
+        return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
+    }
+    @PostMapping("/make-deposit")
+    public ResponseEntity<TransactionResponse> makeDeposit(@RequestBody @Valid TransactionRequest transactionRequest
+            ,@PathVariable(value = "idaccount") Long idAccount){
+        TransactionResponse transaction = transactionService.makeDepositToYourOwnAccount(transactionRequest, idAccount);
         return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
     }
     @GetMapping
